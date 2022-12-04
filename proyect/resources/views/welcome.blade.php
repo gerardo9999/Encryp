@@ -45,11 +45,8 @@
                 </div>
 
                @livewire('encrytp')
-
-
                <br>
-
-               @livewire('http-client')
+               {{-- @livewire('http-client') --}}
             </div>
         </div>
         @livewireScripts

@@ -8,7 +8,6 @@ class ApiHttp
     {
         return Http::get($url);
     }
-
     public static function postApi(String $url, $request)
     {
         return Http::post($url, $request);

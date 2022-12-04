@@ -18,5 +18,6 @@ class HttpClient extends Component
 
     public function getData(){
         $this->data = json_decode($this->getHttpClient('todos/1'));
+        dd($this->data);
     }
 }

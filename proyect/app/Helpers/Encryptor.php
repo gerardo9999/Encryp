@@ -7,6 +7,7 @@ class Encryptor
 {
    public static function method()
    {
+        // AES256
        return Config::get('app.cipher');
    }
  
@@ -17,16 +18,13 @@ class Encryptor
    public static function iv()
    {
        $secret_iv = Str::substr(Config::get('app.key'), 7);
-       $iv = substr(hash('sha256', $secret_iv), 0, 16);
- 
-       return $iv;
+       return substr(hash('sha256', $secret_iv), 0, 16);
    }
  
    public static function encrypt($value)
    {
        $output = openssl_encrypt($value, self::method(), self::hash_key(), 0, self::iv());
        $output = base64_encode($output);
- 
        return $output;
    }
  

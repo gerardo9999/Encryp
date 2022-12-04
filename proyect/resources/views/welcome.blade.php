@@ -45,6 +45,11 @@
                 </div>
 
                @livewire('encrytp')
+
+
+               <br>
+
+               @livewire('http-client')
             </div>
         </div>
         @livewireScripts

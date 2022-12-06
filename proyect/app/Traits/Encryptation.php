@@ -5,7 +5,6 @@ use Encryptor;
 
 trait Encryptation
 {
-    
   public function getEncryptAttribute($value)
   {
     return Encryptor::encrypt($value);

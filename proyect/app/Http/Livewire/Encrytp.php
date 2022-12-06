@@ -16,6 +16,14 @@ class Encrytp extends Component
     public $vencimiento;
     public $codigo;
     public $form;
+    public $interfaz;
+
+
+    public $search;
+    public $showEncript;
+
+    public EncrypModel $object;
+    public $enc;
 
     public function render()
     {
@@ -24,12 +32,15 @@ class Encrytp extends Component
     public function mount()
     {
         $this->form = true;
-
+        $this->enc = false;
         $this->_id = null;
         $this->numero_tarjeta = null;
         $this->nombre_apellido = null;
         $this->vencimiento = null;
         $this->codigo = null;
+
+        $this->interfaz = false;
+        $this->showEncript = false; 
     }
     public function saveEncriptation()
     {
@@ -67,5 +78,35 @@ class Encrytp extends Component
         $this->codigo = null;
 
         $this->form = true;
+    }
+    public function showSearch()
+    {
+        $this->interfaz = true;
+        $this->form = true;
+    }
+    public function searchData()
+    {
+        $object = EncrypModel::findOrFail($this->search);
+        $this->_id = $object->id;
+        $this->nombre_apellido = $object->nombre_apellido;
+        $this->codigo = $object->codigo;
+        $this->numero_tarjeta = $object->numero_tarjeta;
+        $this->vencimiento = $object->vencimiento;
+        $this->showEncript = true;    
+        $this->enc = true;
+    }
+    public function DessencriptarBusqueda()
+    {
+        $this->codigo = $this->getDecencryptAttribute($this->codigo);
+        $this->numero_tarjeta = $this->getDecencryptAttribute($this->numero_tarjeta);
+        $this->vencimiento = $this->getDecencryptAttribute($this->vencimiento);
+        $this->enc = false;
+    }
+    public function EncriptarBusqueda()
+    {
+        $this->codigo = $this->getEncryptAttribute($this->codigo);
+        $this->numero_tarjeta = $this->getEncryptAttribute($this->numero_tarjeta);
+        $this->vencimiento = $this->getEncryptAttribute($this->vencimiento);
+        $this->enc = true;
     }
 }

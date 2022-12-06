@@ -1,4 +1,4 @@
-<div>
+<div x-data='encriptationData'>
     @if ($interfaz)
         <div class="row pt-3">
             <div class="col-12">
@@ -33,7 +33,7 @@
                                 <button wire:click='EncriptarBusqueda' class="btn btn-sm btn-info">Encriptar</button>
                             @endif
                         @else
-                            <button wire:click='searchData' class="btn btn-sm btn-info">Buscar</button>                
+                            <button @click='searchData' class="btn btn-sm btn-info">Buscar</button>                
                         @endif
                     </div>
                 </div>
@@ -89,4 +89,24 @@
             </div>        
         @endif
     @endif
+
+    @push('encript')
+        <script>
+            const encriptationData = () => {
+                return {
+                    searchData(){
+                        this.$wire.validateId().then((response)=>{
+                            if (response) {
+
+                                this.$wire.searchData();
+                            } else {
+                                alert('El id #' + @this.get('search') +' no existe');
+                                @this.set('search',null);
+                            }
+                        })
+                    }
+                }                
+            }
+        </script>
+    @endpush
 </div>

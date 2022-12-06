@@ -5,6 +5,7 @@ namespace App\Http\Livewire;
 use App\Models\EncrypModel;
 use App\Traits\Encryptation;
 use Livewire\Component;
+use PhpParser\Node\Expr\Empty_;
 
 class Encrytp extends Component
 {
@@ -84,8 +85,14 @@ class Encrytp extends Component
         $this->interfaz = true;
         $this->form = true;
     }
+
+    public function validateId()
+    {
+        return EncrypModel::where('id',$this->search)->first() ? true : false;
+    }
     public function searchData()
     {
+        
         $object = EncrypModel::findOrFail($this->search);
         $this->_id = $object->id;
         $this->nombre_apellido = $object->nombre_apellido;
@@ -94,6 +101,7 @@ class Encrytp extends Component
         $this->vencimiento = $object->vencimiento;
         $this->showEncript = true;    
         $this->enc = true;
+
     }
     public function DessencriptarBusqueda()
     {
